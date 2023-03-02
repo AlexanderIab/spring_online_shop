@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,9 +27,8 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public String saveUser(UserDTO userDTO, Model model){
+    public String saveUser(@ModelAttribute("user") UserDTO userDTO){
         if(userService.save(userDTO)) return "redirect:/";
-        model.addAttribute("user", userDTO);
         return "user";
     }
 }
