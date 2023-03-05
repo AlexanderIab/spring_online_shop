@@ -1,8 +1,8 @@
 body,
 .signIn {
-    background-color: #333232;
+    background-color: #e8ddc9;
     font-family: 'Montserrat', sans-serif;
-    color: #fff;
+    color: rgba(0, 0, 0, 0.82);
     font-size: 14px;
     letter-spacing: 1px;
 }
@@ -18,7 +18,8 @@ body,
 span {
     text-transform: uppercase;
     font-size: 12px;
-    opacity: 0.4;
+    font-weight: bold;
+    color: #262626;
     display: inline-block;
     position: relative;
     top: -65px;
@@ -31,7 +32,7 @@ span {
     display: block;
     height: 15px;
     border-radius: 20px;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.67);
     border: 2px solid rgba(255, 255, 255, 0);
     overflow: hidden;
     margin-top: 15px;
@@ -40,9 +41,11 @@ span {
 
 .text:focus {
     outline: 0;
-    border: 2px solid rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(79, 75, 75, 0.5);
     border-radius: 20px;
-    background: rgba(0, 0, 0, 0);
+    background: rgba(234, 234, 234, 0.56);
+
+
 }
 
 .text:focus + span {
@@ -52,7 +55,8 @@ span {
 input[type="text"],
 input[type="password"] {
     font-family: 'Montserrat', sans-serif;
-    color: #b4b0b0;
+    font-weight: bold;
+    color: #000000;
 }
 
 input {
@@ -62,8 +66,8 @@ input {
 }
 
 .signIn {
-    background-color: #030436;
-    color: #a29f9f;
+    background-color: #2e2e5e;
+    color: #ffffff;
     width: 100%;
     padding: 10px 20px;
     display: block;
@@ -73,6 +77,8 @@ input {
     transition: all 0.5s ease-in-out;
     border: none;
     text-transform: uppercase;
+    font-weight: bold;
+
 }
 
 .signIn:hover {
