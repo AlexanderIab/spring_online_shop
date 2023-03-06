@@ -37,7 +37,7 @@ create sequence product_seq start 1 increment 1;
 
 create table products (
                           id int8 not null,
-                          price numeric(19, 2),
+                          price float(53),
                           title varchar(255),
                           primary key (id)
 );
@@ -78,7 +78,7 @@ create table orders (
                         updated timestamp,
                         created timestamp,
                         status varchar(255),
-                        sum numeric(19, 2),
+                        sum float(53),
                         user_id int8,
                         primary key (id)
 );
@@ -95,8 +95,8 @@ create table orders_details (
                                 order_id int8,
                                 product_id int8,
                                 details_id int8 not null,
-                                amount numeric(19, 2),
-                                price numeric(19, 2),
+                                amount float(53),
+                                price float(53),
                                 primary key (id)
 );
 

@@ -4,12 +4,11 @@ import com.iablonski.springboot.shop.spring_online_shop.domain.User;
 import com.iablonski.springboot.shop.spring_online_shop.dto.UserDTO;
 import com.iablonski.springboot.shop.spring_online_shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Objects;
@@ -29,11 +28,19 @@ public class UserController {
         model.addAttribute("users", userService.getAll());
         return "userList";
     }
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/new")
     public String newUser(Model model){
         model.addAttribute("user", new UserDTO());
         return "user";
+    }
+
+    @PostAuthorize("isAuthenticated() and #username == authentication.principal.username")
+    @GetMapping("/{name}/roles")
+    @ResponseBody
+    public String getRoles(@PathVariable("name") String username){
+        User userByName = userService.findByName(username);
+        return userByName.getRole().name();
     }
 
     @PostMapping("/new")
@@ -62,7 +69,7 @@ public class UserController {
         }
         if(userDTO.getPassword() != null
                 && !userDTO.getPassword().isEmpty()
-                && !Objects.equals(userDTO.getPassword(), userDTO.getMatchingPassword())){
+                && !Objects.equals(userDTO.getPassword(), userDTO.getPasswordConfirmation())){
             return "profile";
         }
         userService.updateProfile(userDTO);

@@ -1,0 +1,11 @@
+HELP.md
+mvnw.cmd
+mvnw
+.mvn
+.idea
+target
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+/spring_online_shop.iml
+.gitignore
