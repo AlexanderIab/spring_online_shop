@@ -13,8 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class BucketDTO {
+    private Long id;
     private int quantityOfProducts;
     private double totalSumForAllProducts;
+    private String address;
     private List<ProductInBucketDetailDTO> bucketDetails = new ArrayList<>();
 
     public void aggregate(){
@@ -23,5 +25,6 @@ public class BucketDTO {
                 .map(ProductInBucketDetailDTO::getTotalSumForOneProduct)
                 .mapToDouble(Double::doubleValue)
                 .sum();
+        this.address = null;
     }
 }

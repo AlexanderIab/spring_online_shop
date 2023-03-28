@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>New user</title>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <script th:src="@{/js/newUser.js}" type="text/javascript"></script>
+    <link th:href='@{/style/newUser.css}' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div id="menu"></div>
+<form th:action="@{/users/new}" th:object="${user}" method="post" class="newUserForm">
+    <div th:if="${#fields.hasErrors()}">
+        <p th:each="error : ${#fields.errors()}" th:text="${error}" class="newUserError"></p>
+    </div>
+    <br>
+    <br>
+    <input type="text" th:field="*{username}" class="newUserInput" required minlength="4">
+    <span class="newUserTitle">username</span>
+    <br>
+    <br>
+    <input type="email" th:field="*{email}" class="newUserInput" required>
+    <span class="newUserTitle">email</span>
+    <br>
+    <br>
+    <input type="password" th:field="*{password}" class="newUserInput" required minlength="4" maxlength="8">
+    <span class="newUserTitle">password</span>
+    <br>
+    <br>
+    <input type="password" th:field="*{passwordConfirmation}" class="newUserInput" required>
+    <span class="newUserTitle">confirm password</span>
+    <br>
+    <br>
+    <div sec:authorize="hasAnyAuthority('ADMIN')">
+        <select th:field="*{role}">
+            <option th:value="ADMIN">ADMIN</option>
+            <option th:value="MANAGER">MANAGER</option>
+            <option th:value="CLIENT">CLIENT</option>
+        </select>
+        <span class="newUserTitle">role</span>
+    </div>
+    <table class="newUserTable">
+        <tr>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <div class="newUserCheckbox">
+                    <input type="checkbox" id="check" required>
+                    <label for="check"></label>
+                </div>
+            </td>
+            <td>
+                <span class="newUserConfirm">I confirm registration on the website</span>
+            </td>
+        </tr>
+    </table>
+    <button id="submit" type="submit" class="newUserCreateBtn">Create account</button>
+</form>
+</body>
+
+</html>

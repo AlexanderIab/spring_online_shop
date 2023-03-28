@@ -1,33 +1,44 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Bucket</title>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <link th:href='@{/style/bucket.css}' rel='stylesheet' type='text/css'>
 </head>
+
 <body>
-<header>
-    <div th:insert = "~{fragments/menu :: #navigation-menu}"></div>
-</header>
-
-<h2> Your bucket </h2>
-<h3> All sum -> <b th:text="${bucket.getTotalSumForAllProducts}">1000</b> </h3>
-<table border="1" align="center">
-    <tr>
-        <td>Title</td>
-        <td>Amount</td>
-        <td>Price</td>
-        <td>Sum</td>
-        <td></td>
-    </tr>
-    <tr th:each = "detail: ${bucket.bucketDetails}">
-        <td th:text = "${detail.title}">Cheese</td>
-        <td th:text = "${detail.amount}">2</td>
-        <td th:text = "${detail.price}">11.8</td>
-        <td th:text = "${detail.sum}">22</td>
-        <td><a href="#">Remove </a></td>
-    </tr>
-</table>
-<!--<a th:href="@{/users/new}">Add new</a>-->
-
+<div id="menu"></div>
+<h1 class="bucketH">My bucket</h1>
+<h3 class="bucketTotalH"> Total amount: <b class="bucketTotalSum" th:text="${bucket.getTotalSumForAllProducts}"></b></h3>
+<div class="bucketTable">
+    <table class="table">
+        <tr>
+            <th class="bucketTableTitle">Product</th>
+            <th class="bucketTableTitle">Quantity</th>
+            <th class="bucketTableTitle">Price</th>
+            <th class="bucketTableTitle">Sum</th>
+        </tr>
+        <tr th:each="detail: ${bucket.bucketDetails}">
+            <td class="bucketTableData" th:text="${detail.productTitle}"></td>
+            <td class="bucketTableData" th:text="${detail.quantityOfOneProduct}"></td>
+            <td class="bucketTableData" th:text="${detail.priceOfProduct}"></td>
+            <td class="bucketTableData" th:text="${detail.totalSumForOneProduct}"></td>
+            <td>
+                <form th:action="@{/bucket/delete/{productId}(productId=${detail.productId})}">
+                    <button class="bucketDeleteBtn">Delete</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+    <form th:action="@{/bucket}" method="post" class="bucketAddressForm">
+        <input type="text" th:field="*{bucket.address}" class="bucketInput" required minlength="6">
+        <span class="address">Address</span>
+        <button type="submit" class="bucketCreateOrderBtn">Create order</button>
+    </form>
+</div>
 </body>
 </html>

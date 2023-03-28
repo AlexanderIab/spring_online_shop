@@ -1,6 +1,6 @@
 package com.iablonski.springboot.shop.spring_online_shop.mapper;
 
-import com.iablonski.springboot.shop.spring_online_shop.domain.Product;
+import com.iablonski.springboot.shop.spring_online_shop.entity.Product;
 import com.iablonski.springboot.shop.spring_online_shop.dto.ProductDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

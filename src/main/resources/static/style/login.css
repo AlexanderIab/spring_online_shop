@@ -1,0 +1,117 @@
+body,
+.signIn {
+    background-color: #beb992;
+    font-family: 'Montserrat', sans-serif;
+    color: rgba(0, 0, 0, 0.82);
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.error {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    color: rgba(217, 34, 34, 0.82);
+    font-weight: bold;
+}
+
+.login {
+    position: relative;
+    height: 560px;
+    width: 405px;
+    margin: auto;
+    padding: 100px;
+}
+
+span {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
+    color: #262626;
+    display: inline-block;
+    position: relative;
+    top: -65px;
+    transition: all 0.5s ease-in-out;
+}
+
+.text {
+    width: 89%;
+    padding: 10px 20px;
+    display: block;
+    height: 15px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.67);
+    border: 2px solid rgba(255, 255, 255, 0);
+    overflow: hidden;
+    margin-top: 15px;
+    transition: all 0.5s ease-in-out;
+}
+
+.text:focus {
+    outline: 0;
+    border: 2px solid rgba(79, 75, 75, 0.5);
+    border-radius: 20px;
+    background: rgba(234, 234, 234, 0.56);
+}
+
+.text:focus + span {
+    opacity: 0.6;
+}
+
+input[type="text"],
+input[type="password"] {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    color: #000000;
+}
+
+input {
+    display: inline-block;
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.signIn {
+    background-color: #2e2e5e;
+    height: 39px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.signIn,
+.mainMenu {
+    color: #ffffff;
+    width: 100%;
+    padding: 10px 20px;
+    display: block;
+    margin-top: 30px;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+}
+
+.signIn:hover {
+    background: #1a3059;
+    box-shadow: 0px 4px 35px -5px #122038;
+    cursor: pointer;
+}
+
+.signIn:focus {
+    outline: none;
+}
+
+.mainMenu {
+    background-color: #857f7d;
+    height: 50px;
+    border-radius: 10px;
+    letter-spacing: 4px;
+}
+
+.mainMenu:hover {
+    background: #312f29;
+    box-shadow: 30px 20px 100px -10px #64605b;
+    cursor: pointer;
+}
+
+.mainMenu:focus {
+    outline: none;
+}

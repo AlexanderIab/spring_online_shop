@@ -1,34 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns="http://www.w3.org/1999/html" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <link th:href='@{/style/profile.css}' rel='stylesheet' type='text/css'>
 </head>
-<body>
-<div th:insert="~{fragments/menu :: #navigation-menu}"></div>
 
-<h1>User profile</h1>
-<form th:action="@{/users/profile}" th:object="${user}" method="post">
-    <table border="1">
+<body>
+<div id="menu"></div>
+<h1 class="profileH">Your profile</h1>
+<p th:if="${!userProfile.activated}">Account status: <span
+        class="profileNotActivated">not activated. Check your email.</span></p>
+<p th:if="${userProfile.activated}">Account status: <span class="profileActivated">activated.</span></p>
+<form th:action="@{/users/profile/{id}/history(id=${userProfile.id})}">
+    <button class="profileBtn">Orders history</button>
+</form>
+<br>
+<form class="profileDeleteBtn" th:action="@{/users/{id}/user-delete(id=${userProfile.id})}">
+    <button class="profileBtn">Delete account</button>
+</form>
+<form th:action="@{/users/profile}" th:object="${userProfile}" method="post" class="profileForm">
+    <table class="profileTable">
         <tr>
-            <td>Name</td>
-            <td><input type="text" th:field="*{username}"></td>
+            <td class="profileTableTitle">Username</td>
+            <td class="profileData" th:text="*{username}"></td>
         </tr>
         <tr>
-            <td>Password</td>
-            <td><input type="password" th:field="*{password}"></td>
+            <td class="profileTableTitle">Password</td>
+            <td><input type="password" th:field="*{password}" required></td>
         </tr>
         <tr>
-            <td>Matching password</td>
-            <td><input type="password" th:field="*{passwordConfirmation}"></td>
+            <td class="profileTableTitle">Confirm password</td>
+            <td><input type="password" th:field="*{passwordConfirmation}" required></td>
         </tr>
         <tr>
-            <td>Email</td>
-            <td><input type="email" th:field="*{email}"></td>
+            <td class="profileTableTitle">Email</td>
+            <td class="profileData" th:text="*{email}"></td>
         </tr>
     </table>
-    <button type="submit">Update</button>
+    <button class="profileUpdateBtn" type="submit">Update password</button>
 </form>
 </body>
+
 </html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All users</title>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.3.8/js/jquery.tablesorter.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/js/tableSort.js}" type="text/javascript"></script>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <link th:href='@{/style/usersList.css}' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+<div id="menu"></div>
+<h1 class="usersListH"> All users </h1>
+<div sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+    <form th:action="@{/users/new}">
+        <button class="userListAddNewBtn">Add new user</button>
+    </form>
+</div>
+<div class="usersListTable">
+    <table id="table" class="table">
+        <thead class="tableThead">
+        <tr>
+            <th class="usersListName">Name</th>
+            <th class="usersListEmail">Email</th>
+            <th class="usersListRole">Role</th>
+            <th class="usersListActivated">Activated</th>
+            <th class="usersListArchived">Archived</th>
+        </tr>
+        </thead>
+        <tbody class="tableTbody">
+        <tr th:each="user: ${users}">
+            <td class="usersListTableData" th:text="${user.username}"></td>
+            <td class="usersListTableData" th:text="${user.email}"></td>
+            <td class="usersListTableData" th:text="${user.role}"></td>
+            <td class="usersListTableData" th:text="${user.activated}"></td>
+            <td class="usersListTableData" th:text="${user.archived}"></td>
+            <div sec:authorize="hasAnyAuthority('ADMIN')">
+                <td>
+                    <form th:action="@{/users/{id}/delete(id=${user.id})}">
+                        <button class="userListDeleteBtn">Delete</button>
+                    </form>
+                </td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

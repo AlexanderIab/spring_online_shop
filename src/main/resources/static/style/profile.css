@@ -1,0 +1,126 @@
+body {
+    background-color: #beb992;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.profileH {
+    font-size: 28px;
+    color: #353820;
+    text-transform: uppercase;
+    letter-spacing: 9px;
+    text-shadow: 2px 2px 0 #e6e2e2;
+    font-weight: 900;
+    margin-left: 80px;
+    margin-bottom: 50px;
+}
+
+p {
+    margin-left: 83px;
+    margin-bottom: 50px;
+    font-size: 18px;
+}
+
+.profileActivated {
+    font-weight: bold;
+    color: #53892a;
+}
+
+.profileNotActivated {
+    font-weight: bold;
+    color: #b61f21;
+}
+
+.profileForm {
+    width: 860px;
+    margin-left: 45px;
+}
+
+.profileTable {
+    border-spacing: 35px;
+}
+
+.profileTableTitle {
+    padding: 14px 20px 15px 20px;
+    background: #c9dff0;
+    border: 2px solid rgb(139 139 139 / 50%);
+    border-radius: 20px;
+    font-size: 15px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profileData {
+    padding: 14px 15px 15px 20px;
+    display: block;
+    border: 2px solid rgba(79, 75, 75, 0.5);
+    border-radius: 20px;
+    margin-left: 30px;
+    width: 100%;
+}
+
+input {
+    width: 100%;
+    border-radius: 20px;
+    margin-left: 30px;
+    padding: 14px 15px 15px 20px;
+    background: rgba(255, 255, 255, 0.67);
+    border: 2px solid rgb(172 163 163 / 69%);
+    transition: all 0.5s ease-in-out;
+    font-weight: bold;
+    color: #000000;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: 0;
+    border: 2px solid rgba(79, 75, 75, 0.5);
+    border-radius: 20px;
+    background: rgba(234, 234, 234, 0.56);
+}
+
+.profileUpdateBtn {
+    background-color: #2e2e5e;
+    height: 40px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    width: 29%;
+    padding: 10px 20px;
+    display: block;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+    margin: 20px 0px 100px 35px;
+}
+
+.profileUpdateBtn:hover,
+.profileBtn:hover{
+    background: #436d47;
+    box-shadow: 0 4px 35px -5px #122038;
+    cursor: pointer;
+}
+
+.profileUpdateBtn:focus,
+.profileBtn:focus {
+    outline: none;
+}
+
+.profileBtn {
+    background-color: #2e2e5e;
+    height: 40px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    width: 19%;
+    padding: 10px 20px;
+    display: block;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+    margin: 10px 0px 7px 80px;
+}
+
+.profileDeleteBtn {
+    margin-bottom: 40px;
+}

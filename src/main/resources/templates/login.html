@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns="http://www.w3.org/1999/html" >
-<link th:href='@{../style/loginPage.css}' rel='stylesheet' type='text/css'>
+      xmlns="http://www.w3.org/1999/html">
 <div class="login">
     <head>
         <meta charset="UTF-8">
-        <title>Login page</title>
+        <title>Login</title>
+        <link th:href='@{/style/login.css}' rel='stylesheet' type='text/css'>
     </head>
     <body>
-    <div th:insert="~{fragments/menu :: #navigation-menu}"></div>
+    <form th:action="@{/}">
+        <button class="mainMenu">Home page</button>
+    </form>
     <br>
-    <p th:if="${loginError}" class="error">Wrong user or password</p>
+    <br>
+    <br>
+    <p th:if="${loginError}" class="error"> Wrong user or password </p>
     <br>
     <form th:action="@{/auth}" method="post">
         <input type="text" class="text" name="username">
@@ -20,8 +24,10 @@
         <input type="password" class="text" name="password">
         <span>password</span>
         <br>
-        <br>
         <button class="signIn" type="submit">Log in</button>
+    </form>
+    <form th:action="@{/users/new}">
+        <button class="signIn">Sign up</button>
     </form>
     </body>
 </div>

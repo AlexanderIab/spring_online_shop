@@ -1,0 +1,196 @@
+body {
+    background-color: #beb992;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.notActivatedAccountMessage {
+    color: #9c2626;
+    margin-left: 80px;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 5px;
+    margin-top: -40px;
+    margin-bottom: 50px;
+}
+
+.productsH {
+    font-size: 28px;
+    color: #353820;
+    text-transform: uppercase;
+    letter-spacing: 9px;
+    text-shadow: 2px 2px 0 #e6e2e2;
+    font-weight: 900;
+    margin-left: 80px;
+    margin-bottom: 50px;
+}
+
+/* Products Add Form */
+.productsAddForm {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 40px;
+}
+
+.title,
+.price,
+.category {
+    color: #262626;;
+    position: relative;
+    top: -65px;
+    transition: all 0.5s ease-in-out;
+    margin-left: 40px;
+}
+
+.productsCategory {
+    padding: 7px;
+    display: block;
+    background: rgba(255, 255, 255, 0.67);
+    border: 2px solid rgba(255, 255, 255, 0);
+    overflow: hidden;
+    margin-top: 15px;
+    transition: all 0.5s ease-in-out;
+    border-radius: 20px;
+    margin-left: 40px;
+    width: 116%;
+    color: #000000;
+}
+
+.productsPrice,
+.productsTitle {
+    width: 100%;
+    display: block;
+    height: 15px;
+    border-radius: 20px;
+    margin-left: 40px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.67);
+    border: 2px solid rgb(172 163 163 / 69%);
+    overflow: hidden;
+    margin-top: 15px;
+    transition: all 0.5s ease-in-out;
+}
+
+.productsCategory:focus,
+.productsPrice:focus,
+.productsTitle:focus {
+    outline: 0;
+    border: 2px solid rgba(79, 75, 75, 0.5);
+    border-radius: 20px;
+    background: rgba(234, 234, 234, 0.56);
+}
+
+.productsCategory:focus + span,
+.productsPrice:focus + span,
+.productsTitle:focus + span {
+    opacity: 0.6;
+}
+
+option,
+input {
+    font-weight: bold;
+    color: #000000;
+    display: inline-block;
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.productsAddBtn {
+    background-color: #2e2e5e;
+    height: 39px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    width: 116%;
+    padding: 10px 20px;
+    display: block;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+    margin: 10px 0 7px 40px;
+}
+
+.productsAddBtn:hover {
+    background: #436d47;
+    box-shadow: 0 4px 35px -5px #122038;
+    cursor: pointer;
+}
+
+.productsAddBtn:focus {
+    outline: none;
+}
+
+/* Products List */
+.productsTable {
+    display: block;
+    width: 850px;
+    padding: 10px 18px;
+    margin-top: 10px;
+    margin-left: 25px;
+}
+
+.table {
+    font-weight: bold;
+    text-transform: uppercase;
+    border-spacing: 35px;
+}
+
+.productsTableTitle,
+.productsTablePrice,
+.productsTableCategory {
+    border: 2px solid rgb(139 139 139 / 50%);
+    border-radius: 20px;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+.productsTableTitle:hover,
+.productsTablePrice:hover,
+.productsTableCategory:hover {
+    color: #1d7324;
+    text-decoration: underline;
+}
+
+.table .tableThead {
+    cursor: pointer;
+    background: #c9dff0;
+}
+
+.table .tableThead tr th {
+    font-weight: bold;
+    padding: 10px 25px 10px 25px;
+    text-align: center;
+}
+
+.table .tableTbody .productsTableData {
+    text-align: center;
+    padding: 10px 10px;
+}
+
+.productsAddToBucketBtn,
+.productsDeleteProductBtn {
+    background-color: #2e2e5e;
+    height: 39px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    width: 100%;
+    padding: 6px 60px;
+    display: block;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+}
+
+.productsAddToBucketBtn:hover,
+.productsDeleteProductBtn:hover {
+    background: #436d47;
+    box-shadow: 0 4px 35px -5px #122038;
+    cursor: pointer;
+}
+
+.productsAddToBucketBtn:focus,
+.productsDeleteProductBtn:focus {
+    outline: none;
+}

@@ -1,13 +1,55 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns="http://www.w3.org/1999/html" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
+
 <head>
     <meta charset="UTF-8">
-    <title>Demo shop</title>
+    <title>Home page</title>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <link th:href='@{/style/index.css}' rel='stylesheet' type='text/css'>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
 </head>
+
 <body>
-<div th:insert = "~{fragments/menu :: #navigation-menu}"></div>
-<h2>Amount of clicks -> <b th:text="${amountClicks}">10</b> </h2>
-<h2>UUID -> <b th:text="${uuid}">10</b> </h2>
+<div>
+    <div id="menu"></div>
+    <h2 class="indexWelcomeH"> Welcome to our store </h2>
+    <br>
+    <div sec:authorize="!isAuthenticated()">
+        <h2 class="indexWarningH"> To make purchases, create an account or log in </h2>
+    </div>
+    <table class="indexTable">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <div>
+                    <h1 class="indexTableH">Products</h1>
+                    <br>
+                    <p class="indexATableDescription">In our online store you will always find only fresh and
+                        high-quality products.</p>
+                    <form th:action="@{/products}">
+                        <button class="indexShopNowBtn">Shop now</button>
+                    </form>
+                </div>
+            </td>
+            <td>
+                <img class="indexImg" th:src="@{/img/imgAlcoDr.png}">
+            </td>
+            <td>
+                <img class="indexImg" th:src="@{/img/imgDairyPr.png}">
+            </td>
+            <td>
+                <img class="indexImg" th:src="@{/img/imgFrAndVeg.png}">
+            </td>
+        </tr>
+    </table>
+</div>
 </body>
+
 </html>

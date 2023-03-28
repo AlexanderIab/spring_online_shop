@@ -1,27 +1,88 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<link th:href="@{../style/productPage.css}" rel='stylesheet' type='text/css'>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Product List</title>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.3.8/js/jquery.tablesorter.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <script th:src="@{/js/tableSort.js}" type="text/javascript"></script>
+    <link th:href='@{/style/products.css}' rel='stylesheet' type='text/css'>
 </head>
-<body>
-<div th:insert = "~{fragments/menu :: #navigation-menu}"></div>
-<h2> Our Products </h2>
-<table border="1" align="center">
-    <tr>
-        <td>Title</td>
-        <td>Price</td>
-        <td></td>
-    </tr>
-    <tr th:each = "product: ${products}">
-        <td th:text = "${product.title}">Cheese</td>
-        <td th:text = "${product.price}">12.0</td>
-        <td><a th:href="@{/products/{id}/bucket(id=${product.id})}">Add to bucket </a></td>
-    </tr>
-</table>
-<!--<a th:href="@{/users/new}">Add new</a>-->
 
+<body>
+<div id="menu"></div>
+<div sec:authorize="!isAuthenticated()">
+    <h1 class="notActivatedAccountMessage"> To make purchases, create an account or log in </h1>
+</div>
+<div sec:authorize="hasAnyAuthority('GUEST')">
+    <h1 class="notActivatedAccountMessage"> Your account is not activated! Check your email </h1>
+</div>
+<h1 class="productsH">Our Products</h1>
+<div sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+    <form th:action="@{/products/add}" th:object="${newProduct}" method="post" class="productsAddForm">
+        <br>
+        <br>
+        <input type="text" th:field="*{title}" class="productsTitle" required minlength="2">
+        <span class="title">Title</span>
+        <br>
+        <br>
+        <input type="number" th:field="*{price}" class="productsPrice" required>
+        <span class="price">Price</span>
+        <br>
+        <br>
+        <select th:field="*{categoryEnum}" class="productsCategory">
+            <option th:value="ALCOHOLIC">ALCOHOLIC</option>
+            <option th:value="NON_ALCOHOLIC">NON_ALCOHOLIC</option>
+            <option th:value="DAIRY">DAIRY</option>
+            <option th:value="BREAD_AND_FLOUR">BREAD_AND_FLOUR</option>
+            <option th:value="SEAFOOD">SEAFOOD</option>
+            <option th:value="FRUITS">FRUITS</option>
+            <option th:value="VEGETABLES">VEGETABLES</option>
+            <option th:value="MEAT">MEAT</option>
+        </select>
+        <span class="category">Category</span>
+        <br>
+        <br>
+        <button class="productsAddBtn" type="submit">Add Product To List</button>
+    </form>
+</div>
+<div class="productsTable">
+    <table id="table" class="table">
+        <thead class="tableThead">
+        <tr>
+            <th class="productsTableTitle">Title</th>
+            <th class="productsTablePrice">Price</th>
+            <th class="productsTableCategory">Category</th>
+        </tr>
+        </thead>
+        <tbody class="tableTbody">
+        <tr th:each="product: ${products}">
+            <td class="productsTableData" th:text="${product.title}"></td>
+            <td class="productsTableData" th:text="${product.price}"></td>
+            <td class="productsTableData" th:text="${product.categoryEnum}"></td>
+            <div sec:authorize="hasAnyAuthority('ADMIN','MANAGER','CLIENT')">
+                <td>
+                    <form th:action="@{/products/{id}/bucket(id=${product.id})}">
+                        <button class="productsAddToBucketBtn">Add to bucket</button>
+                    </form>
+                </td>
+            </div>
+            <div sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+                <td>
+                    <form th:action="@{/products/{id}/delete(id=${product.id})}">
+                        <button class="productsDeleteProductBtn">Delete</button>
+                    </form>
+                </td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
+
 </html>

@@ -1,12 +1,10 @@
 package com.iablonski.springboot.shop.spring_online_shop.dto;
 
-import com.iablonski.springboot.shop.spring_online_shop.domain.Product;
+import com.iablonski.springboot.shop.spring_online_shop.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor

@@ -1,0 +1,139 @@
+body {
+    background-color: #beb992;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.newUserError {
+    color: #9c2626;
+    text-transform: uppercase;
+    font-size:14px;
+    letter-spacing: 5px;
+}
+
+.newUserForm {
+    position: relative;
+    height: 560px;
+    width: 405px;
+    margin: auto auto 120px;
+}
+
+.newUserTitle {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: bold;
+    color: #262626;
+    display: inline-block;
+    position: relative;
+    top: -65px;
+    transition: all 0.5s ease-in-out;
+}
+
+.newUserInput {
+    width: 89%;
+    height: 15px;
+    border-radius: 20px;
+}
+
+select,
+.newUserInput{
+    padding: 10px 20px;
+    display: block;
+    background: rgba(255, 255, 255, 0.67);
+    border: 2px solid rgba(255, 255, 255, 0);
+    overflow: hidden;
+    margin-top: 15px;
+    transition: all 0.5s ease-in-out;
+}
+
+select {
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.newUserInput:focus,
+select:focus {
+    outline: 0;
+    border: 2px solid rgba(79, 75, 75, 0.5);
+    border-radius: 20px;
+    background: rgba(234, 234, 234, 0.56);
+}
+
+.newUserInput:focus,
+select:focus + .newUserTitle {
+    opacity: 0.6;
+}
+
+input {
+    font-weight: bold;
+    color: #000000;
+    display: inline-block;
+    padding-top: 20px;
+    font-size: 14px;
+}
+
+.newUserCheckbox input[type="checkbox"] {
+    display: none;
+}
+.newUserCheckbox input[type="checkbox"] + label {
+    display: block;
+    position: relative;
+    width: 59px;
+    height: 30px;
+    border-radius: 20px;
+    background: #e84d4d;
+}
+
+.newUserCheckbox input[type="checkbox"] + label:before {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 24px;
+    border-radius: 1em;
+    background: #fff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    left: 0.2em;
+    top: 0.2em;
+    -webkit-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+}
+.newUserCheckbox input[type="checkbox"]:checked + label {
+    background: #47cf73;
+}
+.newUserCheckbox input[type="checkbox"]:checked + label:before {
+    left: 1.6em;
+}
+
+.newUserConfirm{
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding-left: 20px;
+    font-weight: bold;
+}
+
+.newUserCreateBtn {
+    color: #ffffff;
+    width: 100%;
+    padding: 10px 20px;
+    display: block;
+    margin-top: 30px;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+    background-color: #2e2e5e;
+    height: 39px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.newUserCreateBtn:hover {
+    background: #436d47;
+    box-shadow: 0 4px 35px -5px #122038;
+    cursor: pointer;
+}
+
+.newUserCreateBtn:focus {
+    outline: none;
+}
+
+

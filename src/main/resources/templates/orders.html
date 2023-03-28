@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Orders List</title>
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.3.8/js/jquery.tablesorter.js}"
+            type="text/javascript"></script>
+    <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <script th:src="@{/js/tableSort.js}" type="text/javascript"></script>
+    <link th:href='@{/style/orders.css}' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div id="menu"></div>
+<h1 class="ordersH">Your orders</h1>
+<div class="ordersTable">
+    <table id="table" class="table">
+        <thead class="tableThead">
+        <tr>
+            <th class="ordersTitle">Order_№</th>
+            <th class="ordersTitle">Username</th>
+            <th class="ordersTitle">Address</th>
+            <th class="ordersTitle">Created</th>
+            <th class="ordersTitle">Updated</th>
+            <th class="ordersTitle">Sum</th>
+            <th class="ordersTitle">Status</th>
+        </tr>
+        </thead>
+        <tbody class="tableTbody">
+        <tr th:each="order: ${orders}">
+            <td class="ordersTableData" th:text="${order.orderId}"></td>
+            <td class="ordersTableData" th:text="${order.username}"></td>
+            <td class="ordersTableData" th:text="${order.address}"></td>
+            <td class="ordersTableData" th:text="${order.created}"></td>
+            <td class="ordersTableData" th:text="${order.updated}"></td>
+            <td class="ordersTableData" th:text="${order.sum}"></td>
+            <td class="ordersTableData" th:text="${order.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

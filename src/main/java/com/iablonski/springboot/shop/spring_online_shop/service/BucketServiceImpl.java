@@ -2,33 +2,31 @@ package com.iablonski.springboot.shop.spring_online_shop.service;
 
 import com.iablonski.springboot.shop.spring_online_shop.dao.BucketRepository;
 import com.iablonski.springboot.shop.spring_online_shop.dao.ProductRepository;
-import com.iablonski.springboot.shop.spring_online_shop.domain.Bucket;
-import com.iablonski.springboot.shop.spring_online_shop.domain.Product;
-import com.iablonski.springboot.shop.spring_online_shop.domain.User;
+import com.iablonski.springboot.shop.spring_online_shop.entity.*;
 import com.iablonski.springboot.shop.spring_online_shop.dto.BucketDTO;
 import com.iablonski.springboot.shop.spring_online_shop.dto.ProductInBucketDetailDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
-public class BucketServiceImpl implements BucketService{
+public class BucketServiceImpl implements BucketService {
     private final BucketRepository bucketRepository;
     private final ProductRepository productRepository;
     private final UserService userService;
 
+    private final OrderService orderService;
+
     @Autowired
-    public BucketServiceImpl(BucketRepository bucketRepository, ProductRepository productRepository, UserService userService) {
+    public BucketServiceImpl(BucketRepository bucketRepository, ProductRepository productRepository, UserService userService, OrderService orderService) {
         this.bucketRepository = bucketRepository;
         this.productRepository = productRepository;
         this.userService = userService;
+        this.orderService = orderService;
     }
-
 
 
     @Override
@@ -45,7 +43,7 @@ public class BucketServiceImpl implements BucketService{
     @Transactional
     public void addProducts(Bucket bucket, List<Long> productListById) {
         List<Product> products = bucket.getProducts();
-        List<Product> updatedProducts = products == null ? new ArrayList<>(): new ArrayList<>(products);
+        List<Product> updatedProducts = products == null ? new ArrayList<>() : new ArrayList<>(products);
         updatedProducts.addAll(getProductReferenceByIdList(productListById));
         bucket.setProducts(updatedProducts);
         bucketRepository.save(bucket);
@@ -55,13 +53,13 @@ public class BucketServiceImpl implements BucketService{
     // amounts of products if we double-clicked
     public BucketDTO getBucketByUser(String name) {
         User user = userService.findByName(name);
-        if(user == null || user.getBucket() == null) return new BucketDTO();
+        if (user == null || user.getBucket() == null) return new BucketDTO();
         BucketDTO bucketDTO = new BucketDTO();
         Map<Long, ProductInBucketDetailDTO> mapByProductId = new HashMap<>();
         List<Product> products = user.getBucket().getProducts();
         for (Product product : products) {
             ProductInBucketDetailDTO detail = mapByProductId.get(product.getId());
-            if(detail == null) mapByProductId.put(product.getId(), new ProductInBucketDetailDTO(product));
+            if (detail == null) mapByProductId.put(product.getId(), new ProductInBucketDetailDTO(product));
             else {
                 detail.setQuantityOfOneProduct(detail.getQuantityOfOneProduct() + 1.0);
                 detail.setTotalSumForOneProduct(detail.getTotalSumForOneProduct() + product.getPrice());
@@ -73,7 +71,47 @@ public class BucketServiceImpl implements BucketService{
         return bucketDTO;
     }
 
-    private List<Product> getProductReferenceByIdList(List<Long> productIdList){
+    @Override
+    public void deleteProductFromBucket(String name, Long productId) {
+        User user = userService.findByName(name);
+        List<Product> products = user.getBucket().getProducts();
+        products.removeIf(product -> Objects.equals(product.getId(), productId));
+        Bucket bucket = user.getBucket();
+        bucket.setProducts(products);
+        userService.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void getOrderFromBucket(String name, String address) {
+        User user = userService.findByName(name);
+        if(user==null) throw new RuntimeException("User not found");
+        Bucket bucket = user.getBucket();
+        if(bucket == null || bucket.getProducts().isEmpty()) return;
+        Order order = new Order();
+        order.setStatus(OrderStatus.NEW);
+        order.setUser(user);
+        Map<Product, Long> groupingProductMap = bucket.getProducts().stream()
+                .collect(Collectors.groupingBy(product -> product, Collectors.counting()));
+        List<OrderDetails> orderDetails = groupingProductMap.entrySet().stream()
+                .map(kv -> new OrderDetails(order, kv.getKey(), kv.getValue())).toList();
+
+        double totalSum = orderDetails.stream()
+                .map(detail -> detail.getPrice() * detail.getQuantity())
+                .mapToDouble(Double::doubleValue).sum();
+
+        order.setDetails(orderDetails);
+        order.setSum(totalSum);
+        order.setAddress(address);
+
+        orderService.saveOrder(order);
+        bucket.getProducts().clear();
+        bucketRepository.save(bucket);
+    }
+
+    private List<Product> getProductReferenceByIdList(List<Long> productIdList) {
         return productIdList.stream().map(productRepository::getReferenceById).toList();
     }
+
+
 }
