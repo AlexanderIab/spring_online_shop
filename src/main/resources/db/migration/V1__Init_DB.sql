@@ -9,9 +9,10 @@ create table users (
                        password varchar(255),
                        role varchar(255),
                        activated boolean not null,
-                       activate_code varchar(80),
+                       activation_code varchar(80),
                        primary key (id)
 );
+
 -- BUCKET
 create sequence bucket_seq start 1 increment 1;
 
@@ -34,6 +35,7 @@ create table categories (
                             category_enum varchar(255),
                             primary key (id)
 );
+
 -- PRODUCTS
 create sequence product_seq start 1 increment 1;
 
@@ -49,7 +51,6 @@ alter table if exists products
     add constraint products_fk_category
     foreign key (category_id) references categories;
 
-
 -- PRODUCTS IN BUCKET
 create table buckets_products (
                                  bucket_id int8 not null,
@@ -63,6 +64,7 @@ alter table if exists buckets_products
 alter table if exists buckets_products
     add constraint buckets_products_fk_bucket
     foreign key (bucket_id) references buckets;
+
 -- ORDERS
 create sequence order_seq start 1 increment 1;
 

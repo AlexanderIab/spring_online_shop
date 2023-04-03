@@ -1,6 +1,7 @@
 package com.iablonski.springboot.shop.spring_online_shop.dto;
 
 import com.iablonski.springboot.shop.spring_online_shop.entity.OrderDetails;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import java.util.List;
 
 public interface UserService extends UserDetailsService {
-    boolean save(UserDTO userDTO);
-    boolean findUserInDataBase(String name);
     void save(User user);
-    List<UserDTO> getAll();
-    User findByName(String name);
-    void updateProfile(UserDTO userDTO);
+    void saveNewUser(UserDTO userDTO);
+    List<UserDTO> getAllUsers();
+    User findUserByName(String name);
+    boolean findUserInDataBase(String name);
+    void updateUserProfile(UserDTO userDTOLo);
     void deleteUser(Long id);
-    boolean activateUser(String activateCode);
+    void activateUser(String activationCode);
     void archiveUser(Long id);
 }

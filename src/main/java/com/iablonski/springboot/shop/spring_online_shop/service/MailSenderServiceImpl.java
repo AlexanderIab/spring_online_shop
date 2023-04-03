@@ -1,6 +1,7 @@
 package com.iablonski.springboot.shop.spring_online_shop.service;
 
 import com.iablonski.springboot.shop.spring_online_shop.entity.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MailSenderServiceImpl implements MailSenderService {
-
     private final JavaMailSender mailSender;
     @Value("${server.port}")
     private int port;
@@ -17,8 +17,6 @@ public class MailSenderServiceImpl implements MailSenderService {
     private String hostname;
     @Value("${mail.server.username}")
     private String sender;
-//    @Value("${mail.server.password}")
-//    private String password;
 
     @Autowired
     public MailSenderServiceImpl(JavaMailSender mailSender) {
@@ -29,13 +27,11 @@ public class MailSenderServiceImpl implements MailSenderService {
     public void sendActivateCode(User user) {
         String subject = "Account activation";
         String content = "Please activate your account. go to the link: \n"
-                + "http://" + hostname + ":" + port + "/users/activate/" + user.getActivateCode();
-
+                + "http://" + hostname + ":" + port + "/users/activate/" + user.getActivationCode();
         sendMail(user.getEmail(), subject, content);
     }
 
-
-    private void sendMail(String email, String subject, String content){
+    private void sendMail(String email, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(sender);
         message.setTo(email);
@@ -43,5 +39,4 @@ public class MailSenderServiceImpl implements MailSenderService {
         message.setText(content);
         mailSender.send(message);
     }
-
 }

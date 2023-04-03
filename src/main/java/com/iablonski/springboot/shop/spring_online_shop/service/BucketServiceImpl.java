@@ -1,13 +1,14 @@
 package com.iablonski.springboot.shop.spring_online_shop.service;
 
-import com.iablonski.springboot.shop.spring_online_shop.dao.BucketRepository;
-import com.iablonski.springboot.shop.spring_online_shop.dao.ProductRepository;
+import com.iablonski.springboot.shop.spring_online_shop.exception_handling.exception.UserNotFoundException;
+import com.iablonski.springboot.shop.spring_online_shop.repository.BucketRepository;
+import com.iablonski.springboot.shop.spring_online_shop.repository.ProductRepository;
 import com.iablonski.springboot.shop.spring_online_shop.entity.*;
 import com.iablonski.springboot.shop.spring_online_shop.dto.BucketDTO;
 import com.iablonski.springboot.shop.spring_online_shop.dto.ProductInBucketDetailDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -17,20 +18,20 @@ public class BucketServiceImpl implements BucketService {
     private final BucketRepository bucketRepository;
     private final ProductRepository productRepository;
     private final UserService userService;
-
     private final OrderService orderService;
 
     @Autowired
-    public BucketServiceImpl(BucketRepository bucketRepository, ProductRepository productRepository, UserService userService, OrderService orderService) {
+    public BucketServiceImpl(BucketRepository bucketRepository,
+                             ProductRepository productRepository,
+                             UserService userService,
+                             OrderService orderService) {
         this.bucketRepository = bucketRepository;
         this.productRepository = productRepository;
         this.userService = userService;
         this.orderService = orderService;
     }
 
-
     @Override
-    @Transactional
     public Bucket createBucket(User user, List<Long> productListById) {
         Bucket bucket = new Bucket();
         bucket.setUser(user);
@@ -40,8 +41,7 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    @Transactional
-    public void addProducts(Bucket bucket, List<Long> productListById) {
+    public void addProductsToBucket(Bucket bucket, List<Long> productListById) {
         List<Product> products = bucket.getProducts();
         List<Product> updatedProducts = products == null ? new ArrayList<>() : new ArrayList<>(products);
         updatedProducts.addAll(getProductReferenceByIdList(productListById));
@@ -50,10 +50,10 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    // amounts of products if we double-clicked
     public BucketDTO getBucketByUser(String name) {
-        User user = userService.findByName(name);
-        if (user == null || user.getBucket() == null) return new BucketDTO();
+        User user = userService.findUserByName(name);
+        if (user == null) throw new UserNotFoundException("User not found");
+        if (user.getBucket() == null) return new BucketDTO();
         BucketDTO bucketDTO = new BucketDTO();
         Map<Long, ProductInBucketDetailDTO> mapByProductId = new HashMap<>();
         List<Product> products = user.getBucket().getProducts();
@@ -66,14 +66,14 @@ public class BucketServiceImpl implements BucketService {
             }
         }
         bucketDTO.setBucketDetails(new ArrayList<>(mapByProductId.values()));
-        bucketDTO.aggregate();
-
+        bucketDTO.collectBucket();
         return bucketDTO;
     }
 
     @Override
     public void deleteProductFromBucket(String name, Long productId) {
-        User user = userService.findByName(name);
+        User user = userService.findUserByName(name);
+        if (user == null) throw new UserNotFoundException("User not found");
         List<Product> products = user.getBucket().getProducts();
         products.removeIf(product -> Objects.equals(product.getId(), productId));
         Bucket bucket = user.getBucket();
@@ -82,12 +82,11 @@ public class BucketServiceImpl implements BucketService {
     }
 
     @Override
-    @Transactional
     public void getOrderFromBucket(String name, String address) {
-        User user = userService.findByName(name);
-        if(user==null) throw new RuntimeException("User not found");
+        User user = userService.findUserByName(name);
+        if (user == null) throw new UserNotFoundException("User not found");
         Bucket bucket = user.getBucket();
-        if(bucket == null || bucket.getProducts().isEmpty()) return;
+        if (bucket == null || bucket.getProducts().isEmpty()) return;
         Order order = new Order();
         order.setStatus(OrderStatus.NEW);
         order.setUser(user);
@@ -112,6 +111,4 @@ public class BucketServiceImpl implements BucketService {
     private List<Product> getProductReferenceByIdList(List<Long> productIdList) {
         return productIdList.stream().map(productRepository::getReferenceById).toList();
     }
-
-
 }

@@ -1,6 +1,7 @@
 package com.iablonski.springboot.shop.spring_online_shop.entity;
 
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,8 +26,4 @@ public class Category {
     private CategoryEnum categoryEnum;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<Product> products;
-
-    public Category(CategoryEnum categoryEnum) {
-        this.categoryEnum = categoryEnum;
-    }
 }

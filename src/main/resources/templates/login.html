@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link th:href='@{/style/login.css}' rel='stylesheet' type='text/css'>
+</head>
+
 <div class="login">
-    <head>
-        <meta charset="UTF-8">
-        <title>Login</title>
-        <link th:href='@{/style/login.css}' rel='stylesheet' type='text/css'>
-    </head>
     <body>
     <form th:action="@{/}">
         <button class="mainMenu">Home page</button>

@@ -7,15 +7,13 @@
     <title>Profile</title>
     <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
     <script th:src="@{/js/menu.js}" type="text/javascript"></script>
+    <script th:src="@{/js/changeUser.js}" type="text/javascript"></script>
     <link th:href='@{/style/profile.css}' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 <div id="menu"></div>
 <h1 class="profileH">Your profile</h1>
-<p th:if="${!userProfile.activated}">Account status: <span
-        class="profileNotActivated">not activated. Check your email.</span></p>
-<p th:if="${userProfile.activated}">Account status: <span class="profileActivated">activated.</span></p>
 <form th:action="@{/users/profile/{id}/history(id=${userProfile.id})}">
     <button class="profileBtn">Orders history</button>
 </form>
@@ -23,26 +21,35 @@
 <form class="profileDeleteBtn" th:action="@{/users/{id}/user-delete(id=${userProfile.id})}">
     <button class="profileBtn">Delete account</button>
 </form>
+
 <form th:action="@{/users/profile}" th:object="${userProfile}" method="post" class="profileForm">
+    <p th:if="*{!activated}">Account status: <span
+            class="profileNotActivated">not activated. Check your email.</span></p>
+    <p th:if="*{activated}">Account status: <span class="profileActivated">activated.</span></p>
     <table class="profileTable">
+        <div th:if="${#fields.hasErrors()}">
+            <p th:each="error : ${#fields.errors()}" th:text="${error}" class="matchingPasswordError"></p>
+        </div>
         <tr>
             <td class="profileTableTitle">Username</td>
-            <td class="profileData" th:text="*{username}"></td>
+            <input type="hidden" th:field="*{role}">
+            <input type="hidden" th:field="*{activated}">
+            <td><input type="text" th:field="*{username}" id="name" readonly/></td>
         </tr>
         <tr>
             <td class="profileTableTitle">Password</td>
-            <td><input type="password" th:field="*{password}" required></td>
+            <td><input type="password" th:field="*{password}"></td>
         </tr>
         <tr>
             <td class="profileTableTitle">Confirm password</td>
-            <td><input type="password" th:field="*{passwordConfirmation}" required></td>
+            <td><input type="password" th:field="*{passwordConfirmation}"></td>
         </tr>
         <tr>
             <td class="profileTableTitle">Email</td>
-            <td class="profileData" th:text="*{email}"></td>
+            <td><input type="email" th:field="*{email}" id="email"/></td>
         </tr>
     </table>
-    <button class="profileUpdateBtn" type="submit">Update password</button>
+    <button class="profileUpdateBtn" type="submit">Update account</button>
 </form>
 </body>
 

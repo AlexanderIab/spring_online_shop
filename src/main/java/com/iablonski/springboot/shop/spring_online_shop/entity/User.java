@@ -1,6 +1,7 @@
 package com.iablonski.springboot.shop.spring_online_shop.entity;
 
 import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,8 +28,7 @@ public class User {
     private Role role;
     @OneToOne(mappedBy = "user", cascade = {CascadeType.REFRESH, CascadeType.REMOVE}, fetch = FetchType.LAZY)
     private Bucket bucket;
-    @Column(name = "activate_code")
-    private String activateCode;
+    @Column(name = "activation_code")
+    private String activationCode;
     private boolean activated;
-
 }

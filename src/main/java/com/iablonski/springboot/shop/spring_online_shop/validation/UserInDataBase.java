@@ -1,6 +1,5 @@
 package com.iablonski.springboot.shop.spring_online_shop.validation;
 
-
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -14,6 +13,8 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = UserInDataBaseValidator.class)
 public @interface UserInDataBase {
     String message() default "Name already in use";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }

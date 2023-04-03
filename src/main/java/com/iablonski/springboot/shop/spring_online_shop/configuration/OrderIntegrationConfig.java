@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.integration.channel.DirectChannel;
 
 @Configuration
-// Xml file for configuration
 @ImportResource("classpath:/integration/http-orders-integration.xml")
 public class OrderIntegrationConfig {
+
     private final DirectChannel ordersChannel;
 
     @Autowired
@@ -17,8 +17,8 @@ public class OrderIntegrationConfig {
         this.ordersChannel = ordersChannel;
     }
 
-    public DirectChannel getOrdersChannel() {
-        System.out.println("Шаг получение канала");
+    public DirectChannel getOrdersChannel(){
         return ordersChannel;
     }
+
 }

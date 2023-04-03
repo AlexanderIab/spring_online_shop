@@ -2,11 +2,13 @@ package com.iablonski.springboot.shop.spring_online_shop.controller;
 
 import com.iablonski.springboot.shop.spring_online_shop.dto.ProductDTO;
 import com.iablonski.springboot.shop.spring_online_shop.service.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -28,21 +30,21 @@ public class ProductController {
         return "products";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/{id}/bucket")
-    public String addBucket(@PathVariable Long id, Principal principal) {
-        if (principal == null) return "redirect:/products";
+    public String addProductToBucket(@PathVariable Long id, Principal principal) {
         productService.addToUserBucket(id, principal.getName());
         return "redirect:/products";
     }
 
-    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER')")
     @PostMapping("/add")
     public String addProduct(@ModelAttribute("newProduct") ProductDTO productDTO) {
         productService.addProduct(productDTO);
         return "redirect:/products";
     }
 
-    @PreAuthorize("hasAnyAuthority('MANAGER','ADMIN')")
+    @PreAuthorize("hasAnyAuthority('MANAGER')")
     @RequestMapping("/{id}/delete")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);

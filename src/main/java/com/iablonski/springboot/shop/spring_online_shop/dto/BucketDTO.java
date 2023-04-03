@@ -17,9 +17,10 @@ public class BucketDTO {
     private int quantityOfProducts;
     private double totalSumForAllProducts;
     private String address;
+
     private List<ProductInBucketDetailDTO> bucketDetails = new ArrayList<>();
 
-    public void aggregate(){
+    public void collectBucket(){
         this.quantityOfProducts = bucketDetails.size();
         this.totalSumForAllProducts = bucketDetails.stream()
                 .map(ProductInBucketDetailDTO::getTotalSumForOneProduct)

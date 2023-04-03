@@ -37,7 +37,7 @@
     <br>
     <br>
     <div sec:authorize="hasAnyAuthority('ADMIN')">
-        <select th:field="*{role}">
+        <select th:field="*{role}" id="role">
             <option th:value="ADMIN">ADMIN</option>
             <option th:value="MANAGER">MANAGER</option>
             <option th:value="CLIENT">CLIENT</option>

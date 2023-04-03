@@ -1,8 +1,10 @@
 package com.iablonski.springboot.shop.spring_online_shop.dto;
 
 import com.iablonski.springboot.shop.spring_online_shop.entity.CategoryEnum;
+
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

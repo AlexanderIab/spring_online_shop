@@ -20,7 +20,7 @@ body {
     color: #000000;
     letter-spacing: 3px;
     margin-left: 80px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 
 .bucketTotalSum {
@@ -106,7 +106,6 @@ body {
     opacity: 0.6;
 }
 
-
 input {
     font-weight: bold;
     color: #000000;
@@ -142,6 +141,7 @@ input {
     border: none;
     text-transform: uppercase;
 }
+
 .bucketCreateOrderBtn:hover,
 .bucketDeleteBtn:hover {
     background: #436d47;

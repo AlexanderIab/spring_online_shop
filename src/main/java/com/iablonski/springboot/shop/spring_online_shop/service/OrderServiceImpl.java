@@ -1,16 +1,16 @@
 package com.iablonski.springboot.shop.spring_online_shop.service;
 
 import com.iablonski.springboot.shop.spring_online_shop.configuration.OrderIntegrationConfig;
-import com.iablonski.springboot.shop.spring_online_shop.dao.OrderRepository;
+import com.iablonski.springboot.shop.spring_online_shop.repository.OrderRepository;
 import com.iablonski.springboot.shop.spring_online_shop.entity.Order;
 import com.iablonski.springboot.shop.spring_online_shop.dto.OrderDTO;
 import com.iablonski.springboot.shop.spring_online_shop.dto.OrderDetailsDTO;
 import com.iablonski.springboot.shop.spring_online_shop.dto.OrderIntegrationDTO;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,17 +28,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    @Transactional
     public void saveOrder(Order order) {
         Order savedOrder = orderRepository.save(order);
         sendIntegrationNotify(savedOrder);
     }
 
-    private void sendIntegrationNotify(Order order){
+    private void sendIntegrationNotify(Order order) {
         OrderIntegrationDTO dto = new OrderIntegrationDTO();
         dto.setUsername(order.getUser().getName());
         dto.setAddress(order.getAddress());
         dto.setOrderId(order.getId());
+        dto.setOrderStatus(order.getStatus());
 
         List<OrderDetailsDTO> details = order.getDetails().stream()
                 .map(OrderDetailsDTO::new).collect(Collectors.toList());
@@ -47,14 +47,7 @@ public class OrderServiceImpl implements OrderService {
         Message<OrderIntegrationDTO> message = MessageBuilder.withPayload(dto)
                 .setHeader("Content-type", "application/json")
                 .build();
-        System.out.println("Шаг: сообщение создано");
-        System.out.println(dto);
         integrationConfig.getOrdersChannel().send(message);
-    }
-
-    @Override
-    public Order getOrder(Long id) {
-        return orderRepository.findById(id).orElse(null);
     }
 
     @Override

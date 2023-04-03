@@ -1,6 +1,6 @@
 package com.iablonski.springboot.shop.spring_online_shop.service;
 
-import com.iablonski.springboot.shop.spring_online_shop.dao.UserRepository;
+import com.iablonski.springboot.shop.spring_online_shop.repository.UserRepository;
 import com.iablonski.springboot.shop.spring_online_shop.entity.User;
 import com.iablonski.springboot.shop.spring_online_shop.dto.UserDTO;
 import org.junit.jupiter.api.*;
@@ -34,7 +34,7 @@ public class UserServiceImplTest {
         Mockito.when(userRepository.findFirstByName(Mockito.anyString())).thenReturn(expectedUser);
 
         //execute
-        User actualUser = userService.findByName(name);
+        User actualUser = userService.findUserByName(name);
         System.out.println(actualUser);
 
         //check
@@ -51,8 +51,8 @@ public class UserServiceImplTest {
         Mockito.when(userRepository.findFirstByName(Mockito.eq(name))).thenReturn(expectedUser);
 
         //execute
-        User actualUser = userService.findByName(name);
-        User rndUser = userService.findByName(UUID.randomUUID().toString());
+        User actualUser = userService.findUserByName(name);
+        User rndUser = userService.findUserByName(UUID.randomUUID().toString());
 
         //check
         Assertions.assertNotNull(actualUser);

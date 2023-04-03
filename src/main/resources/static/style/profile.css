@@ -15,8 +15,8 @@ body {
 }
 
 p {
-    margin-left: 83px;
-    margin-bottom: 50px;
+    margin-left: 40px;
+    margin-bottom: 20px;
     font-size: 18px;
 }
 
@@ -25,9 +25,15 @@ p {
     color: #53892a;
 }
 
-.profileNotActivated {
+.profileNotActivated,
+.matchingPasswordError {
     font-weight: bold;
     color: #b61f21;
+}
+
+.matchingPasswordError {
+    margin-left: 40px;
+    margin-bottom: 0px;
 }
 
 .profileForm {
@@ -91,7 +97,7 @@ input:focus {
     transition: all 0.5s ease-in-out;
     border: none;
     text-transform: uppercase;
-    margin: 20px 0px 100px 35px;
+    margin: 20px 0 100px 35px;
 }
 
 .profileUpdateBtn:hover,
@@ -118,7 +124,7 @@ input:focus {
     transition: all 0.5s ease-in-out;
     border: none;
     text-transform: uppercase;
-    margin: 10px 0px 7px 80px;
+    margin: 10px 0 7px 80px;
 }
 
 .profileDeleteBtn {
