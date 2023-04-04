@@ -10,7 +10,7 @@ nav {
 }
 
 .menuNavigation {
-    border-radius: 25px;
+    border-radius: 10px;
     height: fit-content;
     display: inline-flex;
     background-color: #857f7d;
@@ -48,7 +48,7 @@ nav {
     width: 100%;
     z-index: -1;
     transition: 0.2s;
-    border-radius: 25px;
+    border-radius: 10px;
 }
 
 .menuItem:hover::before {

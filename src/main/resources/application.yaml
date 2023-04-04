@@ -19,9 +19,5 @@ mail:
   server:
     host: smtp.gmail.com
     port: 587
-    username: alexy0506@gmail.com
-    password: qduqifibhypushbs
-
-
-
-
+    username: my.test.apps.04@gmail.com
+    password: krrlpoxrxxphjkwj

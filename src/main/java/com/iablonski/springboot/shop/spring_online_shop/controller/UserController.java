@@ -46,10 +46,13 @@ public class UserController {
     }
 
     @PostMapping("/new")
-    public String saveUser(@Validated({PasswordCheck.class, UsernameCheck.class}) @ModelAttribute("user") UserDTO userDTO, BindingResult result) {
+    public String saveUser(
+            @Validated({PasswordCheck.class, UsernameCheck.class}) @ModelAttribute("user") UserDTO userDTO,
+            BindingResult result) {
         if (result.hasErrors()) return "newUser";
         userService.saveNewUser(userDTO);
-        return "redirect:/login";
+        if (userDTO.getRole() == null) return "redirect:/login";
+        else return "redirect:/users";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -76,7 +79,7 @@ public class UserController {
         return "redirect:/users/profile";
     }
 
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated() and @userRepository.findFirstById(#id).name == authentication.principal.username")
     @GetMapping("/profile/{id}/history")
     public String userProfileHistory(@PathVariable("id") Long id, Model model) {
         List<OrderDTO> orders = orderService.getOrdersByUserId(id);
@@ -87,7 +90,7 @@ public class UserController {
     @GetMapping("/activate/{code}")
     public String activateUser(@PathVariable("code") String activationCode) {
         userService.activateUser(activationCode);
-        return "redirect:/login";
+        return "redirect:/logout";
     }
 
     // This method removes user from the database permanently
@@ -100,7 +103,7 @@ public class UserController {
 
     // This method removes the user by himself,
     // but a record about him is saved in the database (field archived - true)
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated() and @userRepository.findFirstById(#id).name == authentication.principal.username")
     @RequestMapping("/{id}/user-delete")
     public String deleteUserByUser(@PathVariable("id") Long id) {
         userService.archiveUser(id);
