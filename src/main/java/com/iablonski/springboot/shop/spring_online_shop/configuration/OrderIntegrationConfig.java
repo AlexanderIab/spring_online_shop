@@ -9,7 +9,6 @@ import org.springframework.integration.channel.DirectChannel;
 @Configuration
 @ImportResource("classpath:/integration/http-orders-integration.xml")
 public class OrderIntegrationConfig {
-
     private final DirectChannel ordersChannel;
 
     @Autowired
@@ -17,8 +16,7 @@ public class OrderIntegrationConfig {
         this.ordersChannel = ordersChannel;
     }
 
-    public DirectChannel getOrdersChannel(){
+    public DirectChannel getOrdersChannel() {
         return ordersChannel;
     }
-
 }
