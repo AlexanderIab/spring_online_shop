@@ -5,12 +5,11 @@ spring:
     show-sql: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/eshop
-    username: iablonski
-    password: aspireASPIRE1
+    url: jdbc:${DATABASE_PATH}
+    username: ${DATABASE_USER}
+    password: ${DATABASE_PASSWORD}
   flyway:
     baseline-on-migrate: true
-
 server:
   hostname: localhost
   port: ${PORT:8080}
@@ -19,4 +18,4 @@ mail:
     host: smtp.gmail.com
     port: 587
     username: my.test.apps.04@gmail.com
-    password: krrlpoxrxxphjkwj
+    password: ${hidden.email.password}
