@@ -1,14 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml"
-      xmlns="http://www.w3.org/1999/html" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8">
-    <title>Error 500</title>
+    <title>Error</title>
+    <link th:href='@{/style/error.css}' rel='stylesheet' type='text/css'>
 </head>
-<body>
-<div class="menu"></div>
-<p th:utext="${errorMessage}">Error</p>
 
+<body>
+<div class="error">
+    <h2 class="errorH">Oops, something went wrong</h2>
+    <p th:utext="${errorMessage}">Error</p>
+    <form th:action="@{/}">
+        <button class="mainMenu">Home page</button>
+    </form>
+</div>
 </body>
+
 </html>

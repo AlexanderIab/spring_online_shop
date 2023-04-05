@@ -16,16 +16,17 @@ public class MainController {
         return "login";
     }
 
-    @RequestMapping("/login-error")// page 404
+    @RequestMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("loginError", true);
         return "login";
     }
 
-    @RequestMapping({"users/menu.html",
+    @RequestMapping({"/menu.html",
+            "users/menu.html",
+            "users/profile/menu.html",
             "products/menu.html",
-            "/menu.html",
-            "users/profile/?/menu.html"})
+            "users/profile/*/menu.html"})
     public String menuCall() {
         return "menu";
     }

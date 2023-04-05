@@ -1,0 +1,52 @@
+body {
+    background-color: #beb992;
+    font-family: 'Montserrat', sans-serif;
+    text-align:center;
+}
+
+.error {
+    margin-top: 250px;
+}
+
+.errorH {
+    font-size: 28px;
+    color: #353820;
+    text-transform: uppercase;
+    letter-spacing: 9px;
+    text-shadow: 2px 2px 0 #e6e2e2;
+    font-weight: 900;
+    margin-bottom: 50px;
+}
+
+p {
+    color: #9c2626;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    font-weight: 900;
+}
+
+.mainMenu {
+    color: #ffffff;
+    padding: 10px 40px;
+    transition: all 0.5s ease-in-out;
+    border: none;
+    text-transform: uppercase;
+}
+
+.mainMenu {
+    background-color: #857f7d;
+    height: 50px;
+    border-radius: 10px;
+    letter-spacing: 4px;
+}
+
+.mainMenu:hover {
+    background: #312f29;
+    box-shadow: 30px 20px 100px -10px #64605b;
+    cursor: pointer;
+}
+
+.mainMenu:focus {
+    outline: none;
+}
