@@ -12,7 +12,7 @@ spring:
     baseline-on-migrate: true
 server:
   hostname: online-shop-iablonski.herokuapp.com
-  port:
+  port: ${PORT:8080}
 mail:
   server:
     host: smtp.gmail.com
