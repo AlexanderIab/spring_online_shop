@@ -27,7 +27,7 @@ public class MailSenderServiceImpl implements MailSenderService {
     public void sendActivateCode(User user) {
         String subject = "Account activation";
         String content = "Please activate your account. go to the link: \n"
-                + "http://" + hostname + ":" + port + "/users/activate/" + user.getActivationCode();
+                + "https://" + hostname + ":" + port + "/users/activate/" + user.getActivationCode();
         sendMail(user.getEmail(), subject, content);
     }
 
