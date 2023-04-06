@@ -13,7 +13,7 @@
     <int:channel id="ordersChannel"/>
 
     <int-http:outbound-channel-adapter id="ordersAdapter"
-                                       url="http://localhost:8090/orders"
+                                       url="https://online-shop-iablonski.herokuapp.com/orders"
                                        http-method="POST"
                                        charset="UTF-8"
                                        channel="ordersChannel">
