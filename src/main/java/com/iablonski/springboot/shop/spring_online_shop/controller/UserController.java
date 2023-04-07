@@ -94,7 +94,7 @@ public class UserController {
     }
 
     // This method removes user from the database permanently
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN') and @userRepository.findFirstById(#id).name != 'admin'")
     @RequestMapping("/{id}/delete")
     public String deleteUserByAdmin(@PathVariable("id") Long id) {
         userService.deleteUser(id);
@@ -103,9 +103,8 @@ public class UserController {
 
     // This method removes the user by himself,
     // but a record about him is saved in the database (field archived - true)
-    @PreAuthorize("isAuthenticated() " +
-            "and @userRepository.findFirstById(#id).name == authentication.principal.username " +
-            "and hasAnyAuthority({'MANAGER','CLIENT','GUEST'})")
+    @PreAuthorize("hasAnyAuthority({'MANAGER','CLIENT','GUEST'}) " +
+            "and @userRepository.findFirstById(#id).name == authentication.principal.username")
     @RequestMapping("/{id}/user-delete")
     public String deleteUserByUser(@PathVariable("id") Long id) {
         userService.archiveUser(id);

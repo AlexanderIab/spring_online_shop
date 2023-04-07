@@ -42,9 +42,12 @@
             <td class="usersListTableData" th:text="${user.archived}"></td>
             <div sec:authorize="hasAnyAuthority('ADMIN')">
                 <td>
-                    <form th:action="@{/users/{id}/delete(id=${user.id})}">
-                        <button class="userListDeleteBtn">Delete</button>
-                    </form>
+                    <div th:if="${user.username} != 'admin'">
+                        <form th:action="@{/users/{id}/delete(id=${user.id})}">
+                            <button class="userListDeleteBtn">Delete</button>
+                        </form>
+                    </div>
+                    <div th:unless="${user.username} != 'admin'"> Blocked </div>
                 </td>
             </div>
         </tr>
