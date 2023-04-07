@@ -79,7 +79,8 @@ public class UserServiceImpl implements UserService {
             savedUser.setEmail(userDTO.getEmail());
             isChanged = true;
         }
-        if (!userDTO.getRole().equals(Role.ADMIN) && !Objects.equals(userDTO.getEmail(), savedUser.getEmail())) {
+        if ((userDTO.getRole().equals(Role.GUEST) || userDTO.getRole().equals(Role.CLIENT))
+                && !Objects.equals(userDTO.getEmail(), savedUser.getEmail())) {
             savedUser.setEmail(userDTO.getEmail());
             savedUser.setRole(Role.GUEST);
             savedUser.setActivationCode(UUID.randomUUID().toString());
