@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
       xmlns="http://www.w3.org/1999/html">
 
 <head>
@@ -18,9 +19,11 @@
     <button class="profileBtn">Orders history</button>
 </form>
 <br>
-<form class="profileDeleteBtn" th:action="@{/users/{id}/user-delete(id=${userProfile.id})}">
-    <button class="profileBtn">Delete account</button>
-</form>
+<div sec:authorize="hasAnyAuthority('MANAGER','CLIENT','GUEST')">
+    <form class="profileDeleteBtn" th:action="@{/users/{id}/user-delete(id=${userProfile.id})}">
+        <button class="profileBtn">Delete account</button>
+    </form>
+</div>
 
 <form th:action="@{/users/profile}" th:object="${userProfile}" method="post" class="profileForm">
     <p th:if="*{!activated}">Account status: <span

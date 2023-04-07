@@ -17,7 +17,7 @@
 <body>
 <div id="menu"></div>
 <h1 class="usersListH"> All users </h1>
-<div sec:authorize="hasAnyAuthority('ADMIN','MANAGER')">
+<div sec:authorize="hasAnyAuthority('ADMIN')">
     <form th:action="@{/users/new}">
         <button class="userListAddNewBtn">Add new user</button>
     </form>
