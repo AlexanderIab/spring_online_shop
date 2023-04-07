@@ -1,16 +1,27 @@
 # Spring Online Shop
 
-This is my current Pet project. Creation of an online shop.
-Only the application framework has been created. 
-Updated every day.
+This is my current Pet project. Online Store.
+At the moment, the main structure of the project has been created.
+
+It was deployed to Heroku: https://online-shop-iablonski.herokuapp.com/
 
 Technology stack:
+
 - Spring Boot
-- Spring Data JPA
 - Spring Security
 - Spring Web
+  <br><br>
+- Spring Data JPA
 - Hibernate
 - PostgreSQL
-- Thymeleaf
 - Flyway
+  <br><br>
+- Spring Boot Mail
+- Spring Integration (as a trial additional feature)
 - Lombok
+  <br><br>
+- HTML
+- Thymeleaf
+- CSS
+
+

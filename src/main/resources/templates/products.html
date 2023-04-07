@@ -23,7 +23,7 @@
     <h1 class="notActivatedAccountMessage"> Your account is not activated! Check your email </h1>
 </div>
 <h1 class="productsH">Our Products</h1>
-<div sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+<div sec:authorize="hasAnyAuthority('MANAGER')">
     <form th:action="@{/products/add}" th:object="${newProduct}" method="post" class="productsAddForm">
         <br>
         <br>
@@ -72,7 +72,7 @@
                     </form>
                 </td>
             </div>
-            <div sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+            <div sec:authorize="hasAnyAuthority('MANAGER')">
                 <td>
                     <form th:action="@{/products/{id}/delete(id=${product.id})}">
                         <button class="productsDeleteProductBtn">Delete</button>
