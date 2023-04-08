@@ -58,7 +58,7 @@ create table buckets_products (
 );
 
 alter table if exists buckets_products
-    add constraint buckets_products_fk_products
+    add constraint buckets_products_fk_product
     foreign key (product_id) references products;
 
 alter table if exists buckets_products
