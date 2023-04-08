@@ -50,7 +50,7 @@ public class MailSenderServiceImpl implements MailSenderService {
                 .map(OrderDetailsDTO::new).collect(Collectors.toList());
         dto.setDetails(details);
 
-        content = "Your order: " + order;
+        content = "Your order: " + dto;
         sendMail(order.getUser().getEmail(), subject, content);
     }
 
