@@ -2,14 +2,12 @@ package com.iablonski.springboot.shop.spring_online_shop.entity;
 
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -25,7 +23,7 @@ public class Bucket {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToMany(cascade = CascadeType.REFRESH)
+    @ManyToMany
     @JoinTable(name = "buckets_products",
             joinColumns = @JoinColumn(name = "bucket_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
