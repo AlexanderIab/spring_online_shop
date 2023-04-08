@@ -1,8 +1,7 @@
 package com.iablonski.springboot.shop.spring_online_shop.service;
 
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.iablonski.springboot.shop.spring_online_shop.dto.OrderDetailsDTO;
+import com.iablonski.springboot.shop.spring_online_shop.dto.OrderIntegrationDTO;
 import com.iablonski.springboot.shop.spring_online_shop.entity.Order;
 import com.iablonski.springboot.shop.spring_online_shop.entity.User;
 
@@ -12,8 +11,8 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MailSenderServiceImpl implements MailSenderService {
@@ -40,8 +39,18 @@ public class MailSenderServiceImpl implements MailSenderService {
 
     @Override
     public void sendAndSaveOrder(Order order) {
-        subject = order.getUser().getName() + ", this id your order № " + order.getId();
-        content = "Your order: ";
+        subject = order.getUser().getName() + ", this is your order № " + order.getId();
+        OrderIntegrationDTO dto = new OrderIntegrationDTO();
+        dto.setUsername(order.getUser().getName());
+        dto.setAddress(order.getAddress());
+        dto.setOrderId(order.getId());
+        dto.setOrderStatus(order.getStatus());
+
+        List<OrderDetailsDTO> details = order.getDetails().stream()
+                .map(OrderDetailsDTO::new).collect(Collectors.toList());
+        dto.setDetails(details);
+
+        content = "Your order: " + order;
         sendMail(order.getUser().getEmail(), subject, content);
     }
 
