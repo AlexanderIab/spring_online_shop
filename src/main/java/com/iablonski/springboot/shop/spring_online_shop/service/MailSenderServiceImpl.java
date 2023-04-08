@@ -40,15 +40,6 @@ public class MailSenderServiceImpl implements MailSenderService {
 
     @Override
     public void sendAndSaveOrder(Order order) {
-        File orderFolder = new File("C:/Users/Default/Downloads");
-        File orderFile = new File(orderFolder, order.getId() + ".json");
-        ObjectMapper mapper = new ObjectMapper();
-        ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-        try {
-            writer.writeValue(orderFile, order);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         subject = order.getUser().getName() + ", this id your order № " + order.getId();
         content = "Your order: " + order.getDetails().toString();
         sendMail(order.getUser().getEmail(), subject, content);
