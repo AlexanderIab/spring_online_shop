@@ -41,7 +41,7 @@ public class MailSenderServiceImpl implements MailSenderService {
     @Override
     public void sendAndSaveOrder(Order order) {
         subject = order.getUser().getName() + ", this id your order № " + order.getId();
-        content = "Your order: " + order.getDetails();
+        content = "Your order: ";
         sendMail(order.getUser().getEmail(), subject, content);
     }
 
