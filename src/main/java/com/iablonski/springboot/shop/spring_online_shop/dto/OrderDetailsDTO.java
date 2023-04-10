@@ -2,11 +2,10 @@ package com.iablonski.springboot.shop.spring_online_shop.dto;
 
 import com.iablonski.springboot.shop.spring_online_shop.entity.OrderDetails;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderDetailsDTO {
@@ -20,5 +19,13 @@ public class OrderDetailsDTO {
         this.price = orderDetails.getPrice();
         this.quantity = orderDetails.getQuantity().doubleValue();
         this.sum = orderDetails.getPrice() * orderDetails.getQuantity().doubleValue();
+    }
+
+    @Override
+    public String toString() {
+        return "Product: " + product + "\n\n" +
+                "quantity: " + quantity +
+                "price: " + price +
+                "sum: " + sum;
     }
 }

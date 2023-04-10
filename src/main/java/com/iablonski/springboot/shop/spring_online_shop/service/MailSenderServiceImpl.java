@@ -45,12 +45,12 @@ public class MailSenderServiceImpl implements MailSenderService {
         dto.setAddress(order.getAddress());
         dto.setOrderId(order.getId());
         dto.setOrderStatus(order.getStatus());
+        dto.setTotalSum(order.getSum());
 
         List<OrderDetailsDTO> details = order.getDetails().stream()
                 .map(OrderDetailsDTO::new).collect(Collectors.toList());
         dto.setDetails(details);
-
-        content = "Your order: " + dto;
+        content = "-----> " + dto;
         sendMail(order.getUser().getEmail(), subject, content);
     }
 

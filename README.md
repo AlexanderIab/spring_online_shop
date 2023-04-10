@@ -17,12 +17,19 @@ It was deployed to Heroku: https://online-shop-iablonski.herokuapp.com/
 - Flyway
   <br><br>
 - Spring Boot Mail
-- Spring Integration (as a trial additional feature)
+- Spring Integration (as a trial additional feature - not working yet)
 - Lombok
   <br><br>
 - HTML
 - Thymeleaf
 - CSS
+- jQuery (sorting tables, displaying the menu and alerts)
+
+In order to enter the user profile, you need to click on the name in the upper right corner of the screen. 
+In the profiles there is an opportunity to change the email and password, 
+as well as delete the account and view the order history. 
+To sort tables (products, order history, users) you need to click on any heading.
+Detailed information about roles and accesses is below.
 
 ### Roles (Admin, Manager, Client, Guest)
 
