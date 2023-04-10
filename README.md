@@ -29,7 +29,9 @@ In order to enter the user profile, you need to click on the name in the upper r
 In the profiles there is an opportunity to change the email and password, 
 as well as delete the account and view the order history. 
 To sort tables (products, order history, users) you need to click on any heading.
+When you create an order, it is sent to your email, and the bucket is cleared.
 Detailed information about roles and accesses is below.
+
 
 ### Roles (Admin, Manager, Client, Guest)
 
@@ -67,7 +69,7 @@ Can be created by any user only after confirming his email address.
 
 - #### **GUEST**
 
-Can be created by any user.
+Can be created by any user. All registered users, but not confirmed email.
 
 1. Can delete his account, which is archived in the database.
 2. When you change your email, you need to verify it.
