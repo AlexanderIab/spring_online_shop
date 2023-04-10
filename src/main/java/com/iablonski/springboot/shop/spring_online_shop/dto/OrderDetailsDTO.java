@@ -23,9 +23,9 @@ public class OrderDetailsDTO {
 
     @Override
     public String toString() {
-        return "Product: " + product + "\n\n" +
-                "quantity: " + quantity +
-                "price: " + price +
+        return "\n" + "Product: " + product + "\n\n" +
+                "quantity: " + quantity + "\n" +
+                "price: " + price + "\n" +
                 "sum: " + sum;
     }
 }
