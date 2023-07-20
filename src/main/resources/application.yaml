@@ -7,7 +7,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/eshop
     username: iablonski
-    password: aspireASPIRE1
+    password: password
   flyway:
     baseline-on-migrate: true
 
