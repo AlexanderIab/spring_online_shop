@@ -1,6 +1,6 @@
 # Spring Online Shop
 
-This is my current Pet project. Online Store.
+This is my project.
 At the moment, the main structure of the project has been created.
 
 It was deployed to Heroku: https://online-shop-iablonski.herokuapp.com/
